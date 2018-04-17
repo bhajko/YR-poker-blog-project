@@ -3,9 +3,12 @@ const mongoose = require('mongoose');
 const db = require('./config/database');
 const path = require('path');
 
+const router = express.Router();
+const auth = require('./routes/auth.route')(router);
+const bodyParser = require('body-parser');
+
 const app = express();
 
-// mongoose.Promise = global.Promise;
 mongoose.connect(db.uri).then(
   () => {
     console.log(`MongoDB connected: ${db.db}`);
@@ -15,7 +18,10 @@ mongoose.connect(db.uri).then(
   },
 );
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/poker-blog/dist/`));
+app.use('/auth', auth);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(`${__dirname}/poker-blog/dist/index.html`));
