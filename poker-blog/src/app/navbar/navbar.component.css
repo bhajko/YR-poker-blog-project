@@ -4,9 +4,16 @@
 
 .navbar .navbar-nav>li>a {
   color: white;
+  font-size: 18px;
 }
 
 .navbar .navbar-nav>li>a:hover,
 .navbar .navbar-nav>li>a:focus {
   color: #E0A800;
+}
+
+#blog-name {
+  color: #C82333;
+  font-weight: bold;
+  font-size: 25px;
 }

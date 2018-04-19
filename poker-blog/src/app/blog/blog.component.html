@@ -1,0 +1,72 @@
+<br>
+<h2>Blog</h2>
+<hr>
+
+<div class="row show-hide-message" *ngIf="message && newPost">
+    <div [ngClass]="messageClass">
+      {{message}}
+    </div>
+  </div> 
+
+<button type="button" name="button" class="btn btn-warning" *ngIf="!newPost" (click)="newBlogPost()">Új bejegyzés</button>
+<button [disabled]="loadingBlogs" type="button" name="button" class="btn btn-info" *ngIf="!newPost" (click)="reloadBlogs()"><span class="oi oi-reload"></span>Frissítés</button>
+<div>&nbsp;</div>
+
+<form [formGroup]="form" name="blogForm" *ngIf="newPost">
+  <div class="form-group">
+    <label for="title">Cím</label>
+    <div>
+      <input type="text" name="title" class="form-control" formControlName="title">
+      <div class="alert alert-danger" *ngIf="form.controls.title.errors?.required && form.controls.title.dirty">A mező kitöltése kötelező</div>
+      <div class="alert alert-danger" *ngIf="form.controls.title.errors?.minlength || form.controls.title.errors?.maxlength">
+        A cím minimum 5, maximum 50 karakter hosszú.
+      </div>
+      <div class="alert alert-danger" *ngIf="form.controls.title.errors?.alphaNumericValidation && form.controls.title.dirty">A cím csak betűket és számokat tartalmazhat.</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+      <label for="body">Tartalom</label>
+      <div>
+        <textarea name="body" class="form-control" cols="30" rows="10" formControlName="body"></textarea>
+        <div class="alert alert-danger" *ngIf="form.controls.body.errors?.required && form.controls.body.dirty">A mező kitöltése kötelező</div>
+        <div class="alert alert-danger" *ngIf="form.controls.body.errors?.minlength || form.controls.body.errors?.maxlength">
+          A tartalom minimum 5, maximum 500 karakter hosszú.
+        </div>
+      </div>
+    </div>
+
+    <button type="button" name="button" class="btn btn-warning" (click)="goBack()">Vissza</button>
+    <button [disabled]="!form.valid" type="button" name="button" class="btn btn-primary" (click)="onBlogSubmit()">Küldés</button>
+
+</form>
+
+<div *ngIf="!newPost">
+  <div class="card">
+    <h5 class="card-header bg-info">Blog cím</h5>
+    <div class="card-body">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero provident numquam nihil quaerat porro doloremque minima eos vero nobis, dolore soluta 
+      laboriosam perspiciatis. Distinctio ducimus provident magni quaerat unde itaque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero alias ipsa 
+      commodi vitae. Deleniti dolorum nam facilis doloremque delectus sapiente voluptatibus, necessitatibus quia eveniet ex voluptas esse repudiandae minima? 
+      Eligendi sunt officia quo aspernatur enim ex exercitationem labore sint veniam, vitae quisquam illum excepturi, ut quod illo odio eum consequuntur?
+    </div>
+    <div class="card-footer">
+      <p><strong>Készítette: </strong>master<strong> Dátum: </strong>2018.04.20.</p>
+      <p><strong>Likes: </strong>25<strong> Dislikes: </strong>5</p>
+      <div class="btn btn-secondary">Szerkesztés</div>
+      <div class="btn btn-danger">Törlés</div>
+    </div>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <button type="button" name="button" class="btn btn-sm btn-success" (click)="postComment()">Szólj hozzá</button>
+      <div>&nbsp;</div>
+      <!-- <form>
+        <textarea name="comment" class="form-control" cols="30" rows="10"></textarea>
+        <br />
+        <button type="button" name="button" class="btn- btn-sm btn-info">Elküld</button>
+        <button type="button" name="button" class="btn- btn-sm btn-danger">Törlés</button>
+      </form> -->
+    </li>
+  </ul>
+</div>

@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthService } from './auth.service';
+import { BlogService } from './blog.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 
 import { AppComponent } from './app.component';
@@ -14,11 +15,12 @@ import { ProfilComponent } from './profil/profil.component';
 import { KnowledgeComponent } from './knowledge/knowledge.component';
 import { RestfulComponent } from './restful/restful.component';
 import { ContactComponent } from './contact/contact.component';
+import { BlogComponent } from './blog/blog.component';
 import { AuthGuard } from './auth.guard';
-
 
 const routes: Routes = [
   { path: '', component: HomepageComponent, pathMatch: 'full' },
+  { path: 'blog', component: BlogComponent, canActivate: [AuthGuard] },
   { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
   { path: 'knowledge', component: KnowledgeComponent, canActivate: [AuthGuard] },
   { path: 'restful', component: RestfulComponent, canActivate: [AuthGuard] },
@@ -35,8 +37,9 @@ const routes: Routes = [
     ProfilComponent,
     KnowledgeComponent,
     RestfulComponent,
-    ContactComponent
-  ],
+    ContactComponent,
+    BlogComponent
+],
   imports: [
     BrowserModule,
     FormsModule,
@@ -45,7 +48,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FlashMessagesModule.forRoot()
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, BlogService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

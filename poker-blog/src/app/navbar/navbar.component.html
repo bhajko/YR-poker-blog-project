@@ -3,34 +3,41 @@
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <a class="navbar-brand" href="#">Poker blog</a>
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a routerLink="/" class="nav-link" href="#">Főoldal
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li *ngIf="authService.loggedIn()" class="nav-item">
-        <a routerLink="profil" class="nav-link" href="#">Profil</a>
-      </li>
-      <li *ngIf="authService.loggedIn()" class="nav-item">
-        <a routerLink="knowledge" class="nav-link" href="#">Tudásbázis</a>
-      </li>
-      <li *ngIf="authService.loggedIn()" class="nav-item">
-        <a routerLink="restful" class="nav-link" href="#">RESTful API</a>
-      </li>
-      <li *ngIf="authService.loggedIn()" class="nav-item">
-        <a routerLink="contact" class="nav-link" href="#">Kapcsolat</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <div class="button-group">
-        <button *ngIf="!authService.loggedIn()" class="btn btn-danger my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModal">Regisztráció</button>
-        <button *ngIf="!authService.loggedIn()" class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModalCenter">Belépés</button>
-        <button *ngIf="authService.loggedIn()" class="btn btn-warning my-2 my-sm-0" type="button" (click)="onLogout()">Kilépés</button>
-      </div>
-    </form>
+  <div class="container">
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <a class="navbar-brand" href="#" id="blog-name">[ Monkey Tilt ]</a>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a routerLink="/" class="nav-link" href="#">Főoldal
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li *ngIf="authService.loggedIn()" class="nav-item">
+          <a routerLink="blog" class="nav-link" href="#">Blog</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="authService.loggedIn()" class="nav-item">
+          <a routerLink="profil" class="nav-link" href="#">Profil</a>
+        </li>
+        <li *ngIf="authService.loggedIn()" class="nav-item">
+          <a routerLink="knowledge" class="nav-link" href="#">Tudásbázis</a>
+        </li>
+        <li *ngIf="authService.loggedIn()" class="nav-item">
+          <a routerLink="restful" class="nav-link" href="#">RESTful API</a>
+        </li>
+        <li *ngIf="authService.loggedIn()" class="nav-item">
+          <a routerLink="contact" class="nav-link" href="#">Kapcsolat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <div class="button-group">
+          <button *ngIf="!authService.loggedIn()" class="btn btn-danger my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModal">Regisztráció</button>
+          <button *ngIf="!authService.loggedIn()" class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModalCenter">Belépés</button>
+          <button *ngIf="authService.loggedIn()" class="btn btn-warning my-2 my-sm-0" type="button" (click)="onLogout()">Kilépés</button>
+        </div>
+      </form>
+    </div>
   </div>
 </nav>
 

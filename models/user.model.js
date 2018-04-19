@@ -57,7 +57,7 @@ const validPassword = (password) => {
 
 const emailValidators = [
   {
-    validator: emailLengthChecker, message: 'Az email hosszúsága minimum 5, maximum 30 karakter hosszú lehet.',
+    validator: emailLengthChecker, message: 'Az email hosszúsága minimum 5, maximum 30 karakter lehet.',
   },
   {
     validator: validEmailChecker, message: 'Érvényes email címet adjon meg!',
@@ -66,7 +66,7 @@ const emailValidators = [
 
 const usernameValidators = [
   {
-    validator: usernameLengthChecker, message: 'Az felhasználónév hosszúsága minimum 3, maximum 15 karakter hosszú lehet.',
+    validator: usernameLengthChecker, message: 'Az felhasználónév hosszúsága minimum 3, maximum 15 karakter lehet.',
   },
   {
     validator: validUsername, message: 'A felhasználónév nem tartalmazhat speciális karaktereket.',
@@ -75,7 +75,7 @@ const usernameValidators = [
 
 const passwordValidators = [
   {
-    validator: passwordLengthChecker, message: 'A jelszó hosszúsága minimum 8, maximum 30 karakter hosszú lehet.',
+    validator: passwordLengthChecker, message: 'A jelszó hosszúsága minimum 8, maximum 30 karakter lehet.',
   },
   {
     validator: validPassword, message: 'A jelszónak tartalmaznia kell legalább egy kisbetűt, nagybetűt, speciális karaktert és számot.',

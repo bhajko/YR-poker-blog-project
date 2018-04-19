@@ -5,6 +5,7 @@ const path = require('path');
 
 const router = express.Router();
 const auth = require('./routes/auth.route')(router);
+const blogs = require('./routes/blogs.route')(router);
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/poker-blog/dist/`));
 app.use('/auth', auth);
+app.use('/blogs', blogs);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(`${__dirname}/poker-blog/dist/index.html`));
