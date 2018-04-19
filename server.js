@@ -6,6 +6,7 @@ const path = require('path');
 const router = express.Router();
 const auth = require('./routes/auth.route')(router);
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 
@@ -18,6 +19,9 @@ mongoose.connect(db.uri).then(
   },
 );
 
+app.use(cors({
+  origin: 'http://localhost:4200',
+}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/poker-blog/dist/`));

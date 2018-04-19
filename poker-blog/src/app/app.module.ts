@@ -4,21 +4,25 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthService } from './auth.service';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { ProfilComponent } from './Profil/Profil.component';
-import { KnowledgeComponent } from './Knowledge/Knowledge.component';
+import { ProfilComponent } from './profil/profil.component';
+import { KnowledgeComponent } from './knowledge/knowledge.component';
 import { RestfulComponent } from './restful/restful.component';
 import { ContactComponent } from './contact/contact.component';
+import { AuthGuard } from './auth.guard';
+
 
 const routes: Routes = [
   { path: '', component: HomepageComponent, pathMatch: 'full' },
-  { path: 'profil', component: ProfilComponent },
-  { path: 'knowledge', component: KnowledgeComponent },
-  { path: 'restful', component: RestfulComponent },
-  { path: 'contact', component: ContactComponent },
+  { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
+  { path: 'knowledge', component: KnowledgeComponent, canActivate: [AuthGuard] },
+  { path: 'restful', component: RestfulComponent, canActivate: [AuthGuard] },
+  { path: 'contact', component: ContactComponent, canActivate: [AuthGuard] },
   { path: '**', component: HomepageComponent }
 ];
 
@@ -38,9 +42,10 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FlashMessagesModule.forRoot()
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

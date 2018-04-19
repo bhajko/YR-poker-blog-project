@@ -7,33 +7,34 @@
     <a class="navbar-brand" href="#">Poker blog</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Főoldal
+        <a routerLink="/" class="nav-link" href="#">Főoldal
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="authService.loggedIn()" class="nav-item">
         <a routerLink="profil" class="nav-link" href="#">Profil</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="authService.loggedIn()" class="nav-item">
         <a routerLink="knowledge" class="nav-link" href="#">Tudásbázis</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="authService.loggedIn()" class="nav-item">
         <a routerLink="restful" class="nav-link" href="#">RESTful API</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="authService.loggedIn()" class="nav-item">
         <a routerLink="contact" class="nav-link" href="#">Kapcsolat</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <div class="button-group">
-        <button class="btn btn-danger my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModal">Regisztráció</button>
-        <button class="btn btn-success my-2 my-sm-0" type="submit">Belépés</button>
+        <button *ngIf="!authService.loggedIn()" class="btn btn-danger my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModal">Regisztráció</button>
+        <button *ngIf="!authService.loggedIn()" class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModalCenter">Belépés</button>
+        <button *ngIf="authService.loggedIn()" class="btn btn-warning my-2 my-sm-0" type="button" (click)="onLogout()">Kilépés</button>
       </div>
     </form>
   </div>
 </nav>
 
-  <!-- Modal -->
+  <!-- Regisztráció Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -89,8 +90,55 @@
         </form>
       </div>
       <div class="modal-footer">
+        <div class="row show-hide-message">
+          <div [ngClass]="messageClass">
+            {{message}}
+          </div>
+        </div> 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
         <button [disabled]="!form.valid" type="button" class="btn btn-success" (click)="onSubmit()">Küldés</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Login Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Belépés</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form [formGroup]="form">
+              <div class="form-group">
+                <label for="username">Felhasználónév</label>
+                <div>
+                  <input type="text" name="username" class="form-control" placeholder="Felhasználónév" formControlName="username">
+                  <div class="alert alert-danger" *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">A mező kitöltése kötelező</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">Jelszó</label>
+                <div>
+                  <input type="password" name="password" class="form-control" placeholder="Jelszó" formControlName="password">
+                  <div class="alert alert-danger" *ngIf="form.controls.password.errors?.required && form.controls.password.dirty">A mező kitöltése kötelező</div>
+                </div>
+              </div>
+            </form>
+      </div>
+      <div class="modal-footer">
+          <div class="row show-hide-message">
+            <div [ngClass]="messageClass2">
+              {{message2}}
+            </div>
+          </div> 
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
+        <button type="button" class="btn btn-success" (click)="onLoginSubmit()">Belépés</button>
       </div>
     </div>
   </div>
