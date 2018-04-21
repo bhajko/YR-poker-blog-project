@@ -64,8 +64,6 @@ const blogSchema = new mongoose.Schema({
   body: { type: String, required: true, validate: bodyValidators },
   createdBy: { type: String },
   Date: { type: Date, default: Date.now() },
-  Likes: { type: Number, default: 0 },
-  Dislikes: { type: Number, default: 0 },
   Comment: [
     {
       comment: { type: String, validate: commentValidators },

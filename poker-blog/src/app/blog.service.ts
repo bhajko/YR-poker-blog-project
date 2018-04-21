@@ -29,4 +29,9 @@ newBlog(blog) {
     return this.http.post(this.domain + '/blogs/newBlog', blog, this.options).map(res => res.json());
 }
 
+getAllBlogs() {
+    this.createAuthHeaders;
+    return this.http.get(this.domain + '/blogs/allBlogs', this.options).map(res => res.json());
+}
+
 }

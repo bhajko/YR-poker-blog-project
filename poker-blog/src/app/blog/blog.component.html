@@ -42,19 +42,16 @@
 </form>
 
 <div *ngIf="!newPost">
-  <div class="card">
-    <h5 class="card-header bg-info">Blog cím</h5>
+
+  <div class="card" *ngFor="let blog of blogPosts">
+    <h5 class="card-header bg-info">{{ blog.title }}</h5>
     <div class="card-body">
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero provident numquam nihil quaerat porro doloremque minima eos vero nobis, dolore soluta 
-      laboriosam perspiciatis. Distinctio ducimus provident magni quaerat unde itaque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero alias ipsa 
-      commodi vitae. Deleniti dolorum nam facilis doloremque delectus sapiente voluptatibus, necessitatibus quia eveniet ex voluptas esse repudiandae minima? 
-      Eligendi sunt officia quo aspernatur enim ex exercitationem labore sint veniam, vitae quisquam illum excepturi, ut quod illo odio eum consequuntur?
+      {{ blog.body }}
     </div>
     <div class="card-footer">
-      <p><strong>Készítette: </strong>master<strong> Dátum: </strong>2018.04.20.</p>
-      <p><strong>Likes: </strong>25<strong> Dislikes: </strong>5</p>
-      <div class="btn btn-secondary">Szerkesztés</div>
-      <div class="btn btn-danger">Törlés</div>
+      <p><strong>Készítette: </strong>{{ blog.createdBy }}<strong> Dátum: </strong>{{ blog.Date | date:'yyyy. MMM. dd' }}</p>
+      <a routerLink="edit-blog/, blog._id" *ngIf="username === blog.createdBy"><button class="btn btn-secondary">Szerkesztés</button></a>
+      <a routerLink="delete-blog/, blog._id" *ngIf="username === blog.createdBy"><button class="btn btn-danger">Törlés</button></a>
     </div>
   </div>
   <ul class="list-group">
@@ -70,3 +67,5 @@
     </li>
   </ul>
 </div>
+
+
