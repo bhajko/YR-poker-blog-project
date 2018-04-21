@@ -9,7 +9,7 @@
 </div> 
 
 <button type="button" name="button" class="btn btn-warning" *ngIf="!newPost" (click)="newBlogPost()">Új bejegyzés</button>
-<button [disabled]="loadingBlogs" type="button" name="button" class="btn btn-info" *ngIf="!newPost" (click)="reloadBlogs()"><span class="oi oi-reload"></span>Frissítés</button>
+<button [disabled]="loadingBlogs" type="button" name="button" class="btn btn-primary" *ngIf="!newPost" (click)="reloadBlogs()"><span class="oi oi-reload"></span>Frissítés</button>
 <div>&nbsp;</div>
 
 <form [formGroup]="form" name="blogForm" *ngIf="newPost">

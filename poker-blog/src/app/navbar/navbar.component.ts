@@ -137,7 +137,7 @@ export class NavbarComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
-    this.flashMessagesService.show('Sikeres kilépés.', { cssClass: 'alert-info' });
+    this.flashMessagesService.show('Sikeres kilépés.', { cssClass: 'alert-success' });
     this.router.navigate(['/']);
   }
 
