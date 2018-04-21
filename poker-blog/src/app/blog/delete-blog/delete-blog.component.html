@@ -1,0 +1,26 @@
+<br>
+<h2>Bejegyzés törlése</h2>
+<hr>
+
+<div class="row show-hide-message" *ngIf="message">
+  <div [ngClass]="messageClass">
+    {{message}}
+  </div>
+</div> 
+
+<div *ngIf="foundBlog">
+  <h4>Megerősítés</h4>
+  <p>Biztosan törölni szeretné a bejegyzést?</p>
+  <button type="button" name="button" class="btn btn-success" (click)="deleteBlog()">Igen</button>
+  <a routerLink="/blog"><button type="button" name="button" class="btn btn-danger">Nem</button></a>
+  
+  <div class="card">
+    <h5 class="card-header bg-info">{{ blog.title }}</h5>
+    <div class="card-body">
+      {{ blog.body }}
+    </div>
+    <div class="card-footer">
+      <p><strong>Készítette: </strong>{{ blog.createdBy }}<strong> Dátum: </strong>{{ blog.Date | date:'yyyy. MMM. dd' }}</p>
+    </div>
+  </div> 
+</div>

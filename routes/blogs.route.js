@@ -1,7 +1,5 @@
 const User = require('../models/user.model');
 const Blog = require('../models/blog.model');
-const jwt = require('jsonwebtoken');
-const db = require('../config/database');
 
 module.exports = (router) => {
   router.post('/newBlog', (req, res) => {
@@ -47,6 +45,98 @@ module.exports = (router) => {
         res.json({ success: true, blogs });
       }
     }).sort({ _id: -1 });
+  });
+
+  router.get('/blogPost/:id', (req, res) => {
+    if (!req.params.id) {
+      res.json({ success: false, message: 'Nincs megadott ID.' });
+    } else {
+      Blog.findOne({ _id: req.params.id }, (err, blog) => {
+        if (err) {
+          res.json({ success: false, message: 'Nincs ilyen ID-jú bejegyzés.' });
+        } else if (!blog) {
+          res.json({ success: false, message: 'Nem található bejegyzés.' });
+        } else {
+          User.findOne({ _id: req.decoded.userId }, (err, user) => {
+            if (err) {
+              res.json({ success: false, message: err });
+            } else if (!user) {
+              res.json({ success: false, message: 'A felhasználót nem lehet azonosítani.' });
+            } else if (user.username !== blog.createdBy) {
+              res.json({ success: false, message: 'Nincs felhatalmazása a bejegyzés szerkesztéséhez.' });
+            } else {
+              res.json({ success: true, blog });
+            }
+          });
+        }
+      });
+    }
+  });
+
+  router.put('/updateBlog', (req, res) => {
+    if (!req.body._id) {
+      res.json({ success: false, message: 'Nincs megadott ID.' });
+    } else {
+      Blog.findOne({ _id: req.body._id }, (err, blog) => {
+        if (err) {
+          res.json({ success: false, message: 'Nincs ilyen ID-jú bejegyzés.' });
+        } else if (!blog) {
+          res.json({ success: false, message: 'Nem található bejegyzés.' });
+        } else {
+          User.findOne({ _id: req.decoded.userId }, (err, user) => {
+            if (err) {
+              res.json({ success: false, message: err });
+            } else if (!user) {
+              res.json({ success: false, message: 'A felhasználót nem lehet azonosítani.' });
+            } else if (user.username !== blog.createdBy) {
+              res.json({ success: false, message: 'Nincs felhatalmazása a bejegyzés szerkesztéséhez.' });
+            } else {
+              blog.title = req.body.title;
+              blog.body = req.body.body;
+              blog.save((err) => {
+                if (err) {
+                  res.json({ success: false, message: err });
+                } else {
+                  res.json({ success: true, message: 'Bejegyzés frissítve.' });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+
+  router.delete('/deleteBlog/:id', (req, res) => {
+    if (!req.params.id) {
+      res.json({ success: false, message: 'Nincs megadott ID.' });
+    } else {
+      Blog.findOne({ _id: req.params.id }, (err, blog) => {
+        if (err) {
+          res.json({ success: false, message: 'Nincs ilyen ID-jú bejegyzés.' });
+        } else if (!blog) {
+          res.json({ success: false, message: 'Nem található bejegyzés.' });
+        } else {
+          User.findOne({ _id: req.decoded.userId }, (err, user) => {
+            if (err) {
+              res.json({ success: false, message: err });
+            } else if (!user) {
+              res.json({ success: false, message: 'A felhasználót nem lehet azonosítani.' });
+            } else if (user.username !== blog.createdBy) {
+              res.json({ success: false, message: 'Nincs felhatalmazása a bejegyzés törléséhez.' });
+            } else {
+              blog.remove((err) => {
+                if (err) {
+                  res.json({ success: false, message: err });
+                } else {
+                  res.json({ success: true, message: 'Bejegyzés törölve.' });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
   });
 
   return router;

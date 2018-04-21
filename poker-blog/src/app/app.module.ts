@@ -16,11 +16,15 @@ import { KnowledgeComponent } from './knowledge/knowledge.component';
 import { RestfulComponent } from './restful/restful.component';
 import { ContactComponent } from './contact/contact.component';
 import { BlogComponent } from './blog/blog.component';
+import { EditBlogComponent } from './blog/edit-blog/edit-blog.component';
+import { DeleteBlogComponent } from './blog/delete-blog/delete-blog.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent, pathMatch: 'full' },
   { path: 'blog', component: BlogComponent, canActivate: [AuthGuard] },
+  { path: 'edit-blog/:id', component: EditBlogComponent, canActivate: [AuthGuard] },
+  { path: 'delete-blog/:id', component: DeleteBlogComponent, canActivate: [AuthGuard] },
   { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
   { path: 'knowledge', component: KnowledgeComponent, canActivate: [AuthGuard] },
   { path: 'restful', component: RestfulComponent, canActivate: [AuthGuard] },
@@ -38,7 +42,9 @@ const routes: Routes = [
     KnowledgeComponent,
     RestfulComponent,
     ContactComponent,
-    BlogComponent
+    BlogComponent,
+    EditBlogComponent,
+    DeleteBlogComponent
 ],
   imports: [
     BrowserModule,

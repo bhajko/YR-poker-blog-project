@@ -3,10 +3,10 @@
 <hr>
 
 <div class="row show-hide-message" *ngIf="message && newPost">
-    <div [ngClass]="messageClass">
-      {{message}}
-    </div>
-  </div> 
+  <div [ngClass]="messageClass">
+    {{message}}
+  </div>
+</div> 
 
 <button type="button" name="button" class="btn btn-warning" *ngIf="!newPost" (click)="newBlogPost()">Új bejegyzés</button>
 <button [disabled]="loadingBlogs" type="button" name="button" class="btn btn-info" *ngIf="!newPost" (click)="reloadBlogs()"><span class="oi oi-reload"></span>Frissítés</button>
@@ -37,7 +37,7 @@
     </div>
 
     <button type="button" name="button" class="btn btn-warning" (click)="goBack()">Vissza</button>
-    <button [disabled]="!form.valid" type="button" name="button" class="btn btn-primary" (click)="onBlogSubmit()">Küldés</button>
+    <button [disabled]="!form.valid" type="button" name="button" class="btn btn-primary" (click)="onBlogSubmit()">Mentés</button>
 
 </form>
 
@@ -50,22 +50,22 @@
     </div>
     <div class="card-footer">
       <p><strong>Készítette: </strong>{{ blog.createdBy }}<strong> Dátum: </strong>{{ blog.Date | date:'yyyy. MMM. dd' }}</p>
-      <a routerLink="edit-blog/, blog._id" *ngIf="username === blog.createdBy"><button class="btn btn-secondary">Szerkesztés</button></a>
-      <a routerLink="delete-blog/, blog._id" *ngIf="username === blog.createdBy"><button class="btn btn-danger">Törlés</button></a>
+      <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy"><button class="btn btn-secondary">Szerkesztés</button></a>
+      <a [routerLink]="['/delete-blog/', blog._id]" *ngIf="username === blog.createdBy"><button class="btn btn-danger">Törlés</button></a>
     </div>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <button type="button" name="button" class="btn btn-sm btn-success" (click)="postComment()">Szólj hozzá</button>
+        <div>&nbsp;</div>
+        <!-- <form>
+          <textarea name="comment" class="form-control" cols="30" rows="10"></textarea>
+          <br />
+          <button type="button" name="button" class="btn- btn-sm btn-info">Elküld</button>
+          <button type="button" name="button" class="btn- btn-sm btn-danger">Törlés</button>
+        </form> -->
+      </li>
+    </ul>
   </div>
-  <ul class="list-group">
-    <li class="list-group-item">
-      <button type="button" name="button" class="btn btn-sm btn-success" (click)="postComment()">Szólj hozzá</button>
-      <div>&nbsp;</div>
-      <!-- <form>
-        <textarea name="comment" class="form-control" cols="30" rows="10"></textarea>
-        <br />
-        <button type="button" name="button" class="btn- btn-sm btn-info">Elküld</button>
-        <button type="button" name="button" class="btn- btn-sm btn-danger">Törlés</button>
-      </form> -->
-    </li>
-  </ul>
 </div>
 
 

@@ -30,8 +30,23 @@ newBlog(blog) {
 }
 
 getAllBlogs() {
-    this.createAuthHeaders;
+    this.createAuthHeaders();
     return this.http.get(this.domain + '/blogs/allBlogs', this.options).map(res => res.json());
+}
+
+getBlogPost(id) {
+    this.createAuthHeaders();
+    return this.http.get(this.domain + '/blogs/blogPost/' + id, this.options).map(res => res.json());
+}
+
+editBlog(blog) {
+    this.createAuthHeaders();
+    return this.http.put(this.domain + '/blogs/updateBlog/', blog, this.options).map(res => res.json());
+}
+
+deleteBlog(id) {
+    this.createAuthHeaders();
+    return this.http.delete(this.domain + '/blogs/deleteBlog/' + id, this.options).map(res => res.json());
 }
 
 }

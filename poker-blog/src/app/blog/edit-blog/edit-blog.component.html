@@ -1,0 +1,25 @@
+<br>
+<h2>Bejegyzés szerkesztése</h2>
+<hr>
+
+<div class="row show-hide-message" *ngIf="message">
+  <div [ngClass]="messageClass">
+    {{message}}
+  </div>
+</div> 
+
+<form *ngIf=!loading>
+  <div class="form-group">
+    <label for="title">Cím</label>
+    <input type="text" name="title" class="form-control" [(ngModel)]="blog.title">
+  </div>
+
+  <div class="form-group">
+      <label for="body">Tartalom</label>
+      <textarea name="body" class="form-control" cols="30" rows="10" [(ngModel)]="blog.body"></textarea>
+    </div>
+
+    <button type="button" name="button" class="btn btn-warning" (click)="goBack()">Vissza</button>
+    <button type="button" name="button" class="btn btn-primary" (click)="updateBlog()">Mentés</button>
+
+</form>
