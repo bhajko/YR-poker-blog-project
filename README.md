@@ -1,6 +1,6 @@
 # Poker Blog
 
-I built this MEAN application for out first big school project. 
+I built this MEAN application for out first big school project. The purpose of this project is to build a fullstack application with CRUD functions implemented.
 
 ## Getting Started
 
@@ -56,7 +56,7 @@ Create server.js
 new file -> server.js
 ```
 
-### In this project Airbnb ESlint rules are use 
+### In this project Airbnb ESlint rules are used
 
 Installation
 
