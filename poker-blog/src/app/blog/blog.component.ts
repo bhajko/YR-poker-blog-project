@@ -15,8 +15,10 @@ export class BlogComponent implements OnInit {
   newPost = false;
   loadingBlogs = false;
   form;
+  commentForm;
   username;
   blogPosts;
+  newComment = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,6 +26,7 @@ export class BlogComponent implements OnInit {
     private blogService: BlogService
   ) { 
     this.createNewBlogForm();
+    this.createCommentForm();
   }
 
   createNewBlogForm() {
@@ -31,24 +34,24 @@ export class BlogComponent implements OnInit {
       title: ['', Validators.compose([
         Validators.required,
         Validators.minLength(5),
-        Validators.maxLength(50),
-        this.alphaNumericValidation
+        Validators.maxLength(50)
       ])],
       body: ['', Validators.compose([
         Validators.required,
         Validators.minLength(5),
-        Validators.maxLength(500)
+        Validators.maxLength(1000)
       ])]
     })
   }
 
-  alphaNumericValidation(controls) {
-    const regExp = new RegExp(/^[a-zA-Z0-9 ]+$/);
-    if (regExp.test(controls.value)) {
-      return null;
-    } else {
-      return { 'alphaNumericValidation': true}
-    }
+  createCommentForm() {
+    this.commentForm = this.formBuilder.group({
+      comment: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(200)
+      ])]
+    })
   }
 
   newBlogPost() {
@@ -63,8 +66,10 @@ export class BlogComponent implements OnInit {
     }, 3000);
   }
 
-  postComment() {
-    
+  showComment(id) {
+    this.commentForm.reset();
+    this.newComment = [];
+    this.newComment.push(id);
   }
 
   onBlogSubmit() {
@@ -99,6 +104,22 @@ export class BlogComponent implements OnInit {
     this.blogService.getAllBlogs().subscribe(data => {
       this.blogPosts = data.blogs;
     });
+  }
+
+  postComment(id) {
+    const comment = this.commentForm.get('comment').value;
+    this.blogService.postComment(id, comment).subscribe(data => {
+      this.getAllBlogs();
+      const index = this.newComment.indexOf(id);
+      this.newComment.splice(index, 1);
+      this.commentForm.reset();
+    });
+  }
+
+  cancelComment(id) {
+    const index = this.newComment.indexOf(id);
+    this.newComment.splice(index, 1);
+    this.commentForm.reset();
   }
 
   ngOnInit() {

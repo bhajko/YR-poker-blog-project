@@ -139,5 +139,41 @@ module.exports = (router) => {
     }
   });
 
+  router.post('/comment', (req, res) => {
+    if (!req.body.comment) {
+      res.json({ success: false, message: 'Nincs megadott komment.' });
+    } else if (!req.body.id) {
+      res.json({ success: false, message: 'Nincs megadott ID.' });
+    } else {
+      Blog.findOne({ _id: req.body.id }, (err, blog) => {
+        if (err) {
+          res.json({ success: false, message: 'Nincs ilyen ID-jú bejegyzés.' });
+        } else if (!blog) {
+          res.json({ success: false, message: 'Nem található bejegyzés.' });
+        } else {
+          User.findOne({ _id: req.decoded.userId }, (err, user) => {
+            if (err) {
+              res.json({ success: false, message: 'Hiba' });
+            } else if (!user) {
+              res.json({ success: false, message: 'A felhasználót nem lehet azonosítani.' });
+            } else {
+              blog.Comment.push({
+                comment: req.body.comment,
+                commentator: user.username,
+              });
+              blog.save((err) => {
+                if (err) {
+                  res.json({ success: false, message: 'Hiba' });
+                  res.json({ success: true, message: 'Komment mentve.' });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+
+
   return router;
 };

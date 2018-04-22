@@ -10,19 +10,11 @@ const titleLengthChecker = (title) => {
   return true;
 };
 
-const alphaNumericTitleChecker = (title) => {
-  if (!title) {
-    return false;
-  }
-  const regExp = new RegExp(/^[a-zA-Z0-9 ]+$/);
-  return regExp.test(title);
-};
-
 const bodyLengthChecker = (body) => {
   if (!body) {
     return false;
   }
-  if (body.length < 5 || body.length > 500) {
+  if (body.length < 5 || body.length > 1000) {
     return false;
   }
   return true;
@@ -42,14 +34,11 @@ const titleValidators = [
   {
     validator: titleLengthChecker, message: 'A cím minimum 5, maximum 50 karakter hosszú lehet.',
   },
-  {
-    validator: alphaNumericTitleChecker, message: 'A cím csak betűket és számokat tartalmazhat!',
-  },
 ];
 
 const bodyValidators = [
   {
-    validator: bodyLengthChecker, message: 'A tartalom hosszúsága minimum 5, maximum 500 karakter lehet.',
+    validator: bodyLengthChecker, message: 'A tartalom hosszúsága minimum 5, maximum 1000 karakter lehet.',
   },
 ];
 

@@ -21,7 +21,6 @@
       <div class="alert alert-danger" *ngIf="form.controls.title.errors?.minlength || form.controls.title.errors?.maxlength">
         A cím minimum 5, maximum 50 karakter hosszú.
       </div>
-      <div class="alert alert-danger" *ngIf="form.controls.title.errors?.alphaNumericValidation && form.controls.title.dirty">A cím csak betűket és számokat tartalmazhat.</div>
     </div>
   </div>
 
@@ -31,7 +30,7 @@
         <textarea name="body" class="form-control" cols="30" rows="10" formControlName="body"></textarea>
         <div class="alert alert-danger" *ngIf="form.controls.body.errors?.required && form.controls.body.dirty">A mező kitöltése kötelező</div>
         <div class="alert alert-danger" *ngIf="form.controls.body.errors?.minlength || form.controls.body.errors?.maxlength">
-          A tartalom minimum 5, maximum 500 karakter hosszú.
+          A tartalom minimum 5, maximum 1000 karakter hosszú.
         </div>
       </div>
     </div>
@@ -42,7 +41,6 @@
 </form>
 
 <div *ngIf="!newPost">
-
   <div class="card" *ngFor="let blog of blogPosts">
     <h5 class="card-header bg-info">{{ blog.title }}</h5>
     <div class="card-body">
@@ -55,15 +53,22 @@
     </div>
     <ul class="list-group">
       <li class="list-group-item">
-        <button type="button" name="button" class="btn btn-sm btn-success" (click)="postComment()">Szólj hozzá</button>
+        <button type="button" name="button" class="btn btn-sm btn-success" (click)="showComment(blog._id)" [disabled]="newComment.indexOf(blog._id) > -1">Szólj hozzá</button>
         <div>&nbsp;</div>
-        <!-- <form>
-          <textarea name="comment" class="form-control" cols="30" rows="10"></textarea>
-          <br />
-          <button type="button" name="button" class="btn- btn-sm btn-info">Elküld</button>
-          <button type="button" name="button" class="btn- btn-sm btn-danger">Törlés</button>
-        </form> -->
-      </li>
+        <div *ngIf="newComment.indexOf(blog._id) > -1">
+          <form [formGroup]="commentForm">
+            <textarea name="comment" class="form-control" cols="30" rows="5" formControlName="comment"></textarea>
+            <div class="alert alert-danger" *ngIf="commentForm.controls.comment.errors?.required && commentForm.controls.comment.dirty">A mező kitöltése kötelező</div>
+            <div class="alert alert-danger" *ngIf="commentForm.controls.comment.errors?.minlength || commentForm.controls.comment.errors?.maxlength">
+              A komment minimum 1, maximum 200 karakter hosszú.
+            </div>
+            <br>
+            <button [disabled]="!commentForm.valid" type="button" name="button" class="btn btn-sm btn-info" (click)="postComment(blog._id)">Elküld</button>
+            <button type="button" name="button" class="btn btn-sm btn-danger" (click)="cancelComment(blog._id)">Törlés</button>
+          </form>
+        </div>
+        <li *ngFor= "let comment of blog.comment" class="list-group-item"><strong>{{ comment.commentator }}: </strong>{{ comment.comment }}</li>
+      <!-- </li> -->
     </ul>
   </div>
 </div>
