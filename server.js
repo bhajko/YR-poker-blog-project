@@ -13,6 +13,7 @@ const cors = require('cors');
 
 const app = express();
 
+// adatbázis kapcsolat
 mongoose.connect(db.uri).then(
   () => {
     console.log(`MongoDB connected: ${db.db}`);
@@ -25,6 +26,8 @@ mongoose.connect(db.uri).then(
 app.use(cors({
   origin: 'http://localhost:4200',
 }));
+
+// Middleware-ek használata
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/poker-blog/dist/`));
@@ -37,10 +40,12 @@ app.use(morgan('dev', {
   skip(req, res) { return res.statusCode < 400; },
 }));
 
+// Szerver és Angular2-Index.html kapcsolat
 app.get('*', (req, res) => {
   res.sendFile(path.join(`${__dirname}/poker-blog/dist/index.html`));
 });
 
+// Start server: 3500-as porton
 app.listen(3500, () => {
   console.log('Listening on port 3500');
 });
