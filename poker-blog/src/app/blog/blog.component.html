@@ -57,6 +57,7 @@
         <div>&nbsp;</div>
         <div *ngIf="newComment.indexOf(blog._id) > -1">
           <form [formGroup]="commentForm">
+            {{ blog | json }}
             <textarea name="comment" class="form-control" cols="30" rows="5" formControlName="comment"></textarea>
             <div class="alert alert-danger" *ngIf="commentForm.controls.comment.errors?.required && commentForm.controls.comment.dirty">A mező kitöltése kötelező</div>
             <div class="alert alert-danger" *ngIf="commentForm.controls.comment.errors?.minlength || commentForm.controls.comment.errors?.maxlength">
@@ -67,7 +68,7 @@
             <button type="button" name="button" class="btn btn-sm btn-danger" (click)="cancelComment(blog._id)">Törlés</button>
           </form>
         </div>
-        <li *ngFor= "let comment of blog.comment" class="list-group-item"><strong>{{ comment.commentator }}: </strong>{{ comment.comment }}</li>
+        <li *ngFor= "let comment of blog.comment" class="list-group-item"><strong>{{ Comment.commentator }}: </strong>{{ Comment.comment }}</li>
       <!-- </li> -->
     </ul>
   </div>
