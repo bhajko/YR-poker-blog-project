@@ -24,7 +24,7 @@ export class BlogComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private blogService: BlogService
-  ) { 
+  ) {
     this.createNewBlogForm();
     this.createCommentForm();
   }
@@ -77,7 +77,7 @@ export class BlogComponent implements OnInit {
       title: this.form.get('title').value,
       body: this.form.get('body').value,
       createdBy: this.username
-    } 
+    }
     this.blogService.newBlog(blog).subscribe(data => {
       if (!data.success) {
         this.messageClass = 'alert alert-danger';

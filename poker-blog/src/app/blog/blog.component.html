@@ -6,10 +6,11 @@
   <div [ngClass]="messageClass">
     {{message}}
   </div>
-</div> 
+</div>
 
 <button type="button" name="button" class="btn btn-warning" *ngIf="!newPost" (click)="newBlogPost()">Új bejegyzés</button>
-<button [disabled]="loadingBlogs" type="button" name="button" class="btn btn-primary" *ngIf="!newPost" (click)="reloadBlogs()"><span class="oi oi-reload"></span>Frissítés</button>
+<button [disabled]="loadingBlogs" type="button" name="button" class="btn btn-primary" *ngIf="!newPost" (click)="reloadBlogs()">
+  <span class="oi oi-reload"></span>Frissítés</button>
 <div>&nbsp;</div>
 
 <form [formGroup]="form" name="blogForm" *ngIf="newPost">
@@ -25,18 +26,18 @@
   </div>
 
   <div class="form-group">
-      <label for="body">Tartalom</label>
-      <div>
-        <textarea name="body" class="form-control" cols="30" rows="10" formControlName="body"></textarea>
-        <div class="alert alert-danger" *ngIf="form.controls.body.errors?.required && form.controls.body.dirty">A mező kitöltése kötelező</div>
-        <div class="alert alert-danger" *ngIf="form.controls.body.errors?.minlength || form.controls.body.errors?.maxlength">
-          A tartalom minimum 5, maximum 1000 karakter hosszú.
-        </div>
+    <label for="body">Tartalom</label>
+    <div>
+      <textarea name="body" class="form-control" cols="30" rows="10" formControlName="body"></textarea>
+      <div class="alert alert-danger" *ngIf="form.controls.body.errors?.required && form.controls.body.dirty">A mező kitöltése kötelező</div>
+      <div class="alert alert-danger" *ngIf="form.controls.body.errors?.minlength || form.controls.body.errors?.maxlength">
+        A tartalom minimum 5, maximum 1000 karakter hosszú.
       </div>
     </div>
+  </div>
 
-    <button type="button" name="button" class="btn btn-warning" (click)="goBack()">Vissza</button>
-    <button [disabled]="!form.valid" type="button" name="button" class="btn btn-primary" (click)="onBlogSubmit()">Mentés</button>
+  <button type="button" name="button" class="btn btn-warning" (click)="goBack()">Vissza</button>
+  <button [disabled]="!form.valid" type="button" name="button" class="btn btn-primary" (click)="onBlogSubmit()">Mentés</button>
 
 </form>
 
@@ -47,17 +48,23 @@
       {{ blog.body }}
     </div>
     <div class="card-footer">
-      <p><strong>Készítette: </strong>{{ blog.createdBy }}<strong> Dátum: </strong>{{ blog.Date | date:'yyyy. MMM. dd' }}</p>
-      <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy"><button class="btn btn-secondary">Szerkesztés</button></a>
-      <a [routerLink]="['/delete-blog/', blog._id]" *ngIf="username === blog.createdBy"><button class="btn btn-danger">Törlés</button></a>
+      <p>
+        <strong>Készítette: </strong>{{ blog.createdBy }}
+        <strong> Dátum: </strong>{{ blog.Date | date:'yyyy. MMM. dd' }}</p>
+      <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy">
+        <button class="btn btn-secondary">Szerkesztés</button>
+      </a>
+      <a [routerLink]="['/delete-blog/', blog._id]" *ngIf="username === blog.createdBy">
+        <button class="btn btn-danger">Törlés</button>
+      </a>
     </div>
+
     <ul class="list-group">
       <li class="list-group-item">
         <button type="button" name="button" class="btn btn-sm btn-success" (click)="showComment(blog._id)" [disabled]="newComment.indexOf(blog._id) > -1">Szólj hozzá</button>
         <div>&nbsp;</div>
         <div *ngIf="newComment.indexOf(blog._id) > -1">
           <form [formGroup]="commentForm">
-            {{ blog | json }}
             <textarea name="comment" class="form-control" cols="30" rows="5" formControlName="comment"></textarea>
             <div class="alert alert-danger" *ngIf="commentForm.controls.comment.errors?.required && commentForm.controls.comment.dirty">A mező kitöltése kötelező</div>
             <div class="alert alert-danger" *ngIf="commentForm.controls.comment.errors?.minlength || commentForm.controls.comment.errors?.maxlength">
@@ -68,10 +75,9 @@
             <button type="button" name="button" class="btn btn-sm btn-danger" (click)="cancelComment(blog._id)">Törlés</button>
           </form>
         </div>
-        <li *ngFor= "let comment of blog.comment" class="list-group-item"><strong>{{ Comment.commentator }}: </strong>{{ Comment.comment }}</li>
-      <!-- </li> -->
+        <li *ngFor="let comment of blog.Comment" class="list-group-item">
+          <strong>{{ comment.commentator }}: </strong>{{ comment.comment }}</li>
+        <!-- </li> -->
     </ul>
   </div>
 </div>
-
-

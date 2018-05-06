@@ -1,4 +1,61 @@
 <br>
 <h2>RESTful API</h2>
 <hr>
-<p>TBA</p>
+
+<div class="row">
+  <div class="col-4">
+    <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab"
+        aria-controls="home">Regisztráció</a>
+      <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab"
+        aria-controls="profile">Belépés</a>
+      <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab"
+        aria-controls="messages">Blog post létrehozás</a>
+      <a class="list-group-item list-group-item-action" id="list-jwt-list" data-toggle="list" href="#list-jwt" role="tab" aria-controls="jwt">Blog post szerkesztés</a>
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab"
+        aria-controls="settings">Blog post törlés</a>
+      <a class="list-group-item list-group-item-action" id="list-morgan-list" data-toggle="list" href="#list-morgan" role="tab"
+        aria-controls="morgan">Hozzászólás</a>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+        <a href='https://photos.google.com/share/AF1QipPpjz43R8OFLibjgNi_Jhy3c7BxAQ74JQ_4pNDXVFbZ5gDcYsDrPHOM4Kzr57AFpA?key=U2M0S1ZSeVE5R21scWlETlZXM25LRHZkSTRSc3FR&source=ctrlq.org'>
+          <img src='https://lh3.googleusercontent.com/93lHrSLD2u7doOm2spmIwKaSx-sW7YrwMNeCGRfJpHWCpc__tugxnUf4L4VGah1p-LshWP086HneLCw3FHVNtstAJoTZaYeVoeawQ9Zt-XI_dPnlkr-OKUeh_ZvzzeAmnzsfD92ZvA=w2400'
+          />
+        </a>
+      </div>
+      <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+        <a href='https://photos.google.com/share/AF1QipOKPF6XOvSO7R-W6P4rtzfKdkiN1wmEA687EFz99V68EOfshxtTKzp2G5mozsPwWA?key=cTI1OWtxUU95aXBGbWt4UVE3amVKanBXYk16VVNn&source=ctrlq.org'>
+          <img src='https://lh3.googleusercontent.com/s_dt-vZxZUQAbxsaOC-bshiW8mTbz_ffr__2RA8QCurYmwDO46YLfac6krHbnmZkcwMD8yTI2gfY_0Fy6QZxF_KuQ_kXQX5IZSe5hn-dawaQnl-HJAtriAmXHzl9QwRFMXFdmFjqEQ=w2400'
+          />
+        </a>
+      </div>
+      <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+        <a href='https://photos.google.com/share/AF1QipPQa50-clVs_bkNeymYG3WB3-wyurj88ad_rzsPFft_h47h0F15dtt4LPJakgwVQQ?key=XzdxNzBEaERmdGdaVlVJa0ZadDlJdUJYOHZzV3BB&source=ctrlq.org'>
+          <img src='https://lh3.googleusercontent.com/7gmiV1Jj9rzkktreQdKqVOdckHoGb1SnkIWX5l-rfLpxMoLRlLaTP613z5P3WTzssnyKeQp56-K9t689c0e5JzefQfW23PPX8-GsR5Omx5vSToYLeKvRUD5ewJfTr2ckf5MdtNxdoQ=w2400'
+          />
+        </a>
+      </div>
+      <div class="tab-pane fade" id="list-jwt" role="tabpanel" aria-labelledby="list-jwt-list">
+        <a href='https://photos.google.com/share/AF1QipMi9CLIZdFKWp8PHpuc7vx6CclXjZxTMWYkWnCT19o7sakuyVe5MBF8tyBASduqMA?key=T241T01tMS0zR1VNWFZHOVN0WWxxYlNJSGFxbGln&source=ctrlq.org'>
+          <img src='https://lh3.googleusercontent.com/jundkoIKTQYZX4UP9NFVjCfwyJUGm-FGRphMljQm4pqlFpJG249SVF2R-UjJT2FWo2AEsN-oLO0Tu4roUH5zHdnA7cjooIepv4Jk45mX6Eor9gWFNVBr8YoP7BWGVT5EElZT5unnoQ=w2400'
+          />
+        </a>
+      </div>
+      <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
+        <a href='https://photos.google.com/share/AF1QipNrY6IewQHptctVRbCGM3u6pWNsAA1E8WuiftK3UtPTxlTWVnhQWgYYP7PxykDxGg?key=WkhmQ0E5OTZSaTh3UHFJMnNJMXpRSW1lUmxOeklR&source=ctrlq.org'>
+          <img src='https://lh3.googleusercontent.com/kXNP70Qq9YIlw-OXP6eRxlg6iutB9HFs87fO9TYQsnqmhOl1LYQ85JfJG5-iSA7xd_GG0ut1tfIer6_93UVxjRQhDUbrboMIVUyPDUG0yKAvK647WbLzzVb4KwDCD0MYRGFrT_NwbQ=w2400'
+          />
+        </a>
+      </div>
+      <div class="tab-pane fade" id="list-morgan" role="tabpanel" aria-labelledby="list-morgan-list">
+        <a href='https://photos.google.com/share/AF1QipPvlNX84LAMkfVx79UI-zDXprP_VmsVMl-IUFLQm8z7xTlF-aefB4gXDFSd9RHTbQ?key=dmEyVHdZX09HdGVwWEtHVXIwd1ZnS1ZLT251TV9n&source=ctrlq.org'>
+          <img src='https://lh3.googleusercontent.com/tL9oG6ungjSmo2QgdRZdHXaiUsd1E8IUamIYMF749XMk-wVCbhFGoM_SeL5MfwhUcdOE38yb87oGY72pnNAqCm1fV5rdjIMl6JLRu9t55QZH-V61CkmltvLyTyFh4Rx5VfbHdlskzg=w2400'
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
